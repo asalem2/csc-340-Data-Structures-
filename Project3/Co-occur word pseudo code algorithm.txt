@@ -1,0 +1,39 @@
+Input: The paragraph the user wants to scan for co-occuring words
+
+Output: The pair of co-occuring words that show up the most frequent in the paragraph
+
+Algorithm: 
+
+1 Ask user to input the paragraph they want to scan for co-occuring word frequency.Store the paragraph into a string variable by using getline() function. 
+
+2 Start by scanning the paragraph and counting the periods inside it. Store the count of periods into a int variable for later use. While you scan the paragraph shift the uppercase letters to lowercase so the program can be case insensitive
+
+3 Call on function countCoOccurences(string paragraph)and send the paragraph as a parameter to scan it for co-occuring words
+
+4 Make a struct named coOccurringFreq to hold variables of paired words and their count. This is what it will contain 
+			string pair;
+			int freq;
+
+5 Start scanning the paragraph and store the pair of words into an array of struct type. It will scan the first word then look for a second space to pair it with all the words after it until the sentnce ends. When its storing a pair it first puts the pair in a seperate string variable to know what the pair is, ex: pair[0] = "this is", then it orders the letters in the pair for better comparison later. It will store these ordered pairs into an array of struct type string array. Ex: "This is a test sentence." would appear like this in the array.  
+	pair[0] = "this is"	-->	array[0].pair = "hiisst"      	
+	pair[1] = "this a"	-->	array[1].pair = "ahist" 	
+	pair[1] = "this test"	-->	array[2].pair = "ehissttt" 	
+	pair[3] = "this sentence" -->	array[3].pair = "ceeehinsstt" 
+then starts to scan the second word and pairs it with the words after it and so on unitl the sentence ends.
+
+6 After a sentence is scanned and all possible co occuring words are stored in the array we start scanning the next sentence, by scanning and ordering the pair of words, but this time we check to see if its already a pair in the array we are trying to store in. If it is we put the count up by 1 to that particular index and dont add it into the array if that pair is not in the array we then add it. 
+
+7 We use a for loop and the number of periods as the iterator so we can know when to stop scanning overall. Inside the for loop we use a while loop that scans the particular location in the sentnce always checking if its a "." if not it scans more words, if it is a period it stops the while loop and the iterator gets incrmented by 1.
+index = 0; //Keeps track of index
+for(i = 0; i < periods_in_paragraph, i++){
+     while(paragraph_position != "."){
+        if(array[current].pair == array[anything_already_in_array].pair){     //doesnt add to array if pair alreay in the string array and instead increments //freq by 1
+           array[anything_already_in_array].freq++;  }
+	 else{
+			//add to array if pair not already in
+			array[newindex] = array[current].pair ; 
+              }
+8 By the end we use a selection sort algorithm to sort the frequencies of the co-occuring word int array from largest to smallest. We can check to see if multiple pairs share the same number of most appearances if not we can print the pair of words or print message saying multiple pair of words have same co-occurence frequency.
+largest equals the index of the pair with the most ferquencies
+
+cout << "Most co-occuring pair is" << pair[largest]<< " occuring " << array[largest] << " times.";
